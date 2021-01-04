@@ -1,14 +1,29 @@
 <html>
 <head>
+    <!-- <NOTE> -->
     <link rel="stylesheet" href="player_embedder/shaka-player/dist/controls.css">
     <link rel="stylesheet" href="player_embedder/player_embedder.css">
+    <!-- </NOTE> -->
 </head>
 <body>
 
+    <!-- <NOTE> -->
+    <!-- This div is what should be added in the page content area.
+    The data attributes are used in the script with defaults so we can
+    change the stream url when needed. -->
     <div id="fmcm-player-container" data-wowza-host="https://media.firstmethodistmansfield.tv" data-app-name="live" data-stream-name="livestream"></div>
+    <!-- </NOTE> -->
 
+
+    <!-- <NOTE> -->
+    <!-- jQuery doesn't have to be reimported here, these are just for local testing -->
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- </NOTE> -->
+
+
+    <!-- <NOTE> -->
+    <!-- These two script tags do the business. Can be placed anywhere after jQuery -->
     <script src="player_embedder/player_embedder.js"></script>
     <script type="text/javascript">
         $(function(){
@@ -49,5 +64,6 @@
             }
         });
     </script>
+    <!-- </NOTE> -->
 </body>
 </html>

@@ -1,0 +1,53 @@
+<html>
+<head>
+    <link rel="stylesheet" href="player_embedder/shaka-player/dist/controls.css">
+    <link rel="stylesheet" href="player_embedder/player_embedder.css">
+</head>
+<body>
+
+    <div id="fmcm-player-container" data-wowza-host="https://media.firstmethodistmansfield.tv" data-app-name="live" data-stream-name="livestream"></div>
+
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="player_embedder/player_embedder.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            playerEmbedder.scriptUrls.shaka = ['player_embedder/shaka-player/dist/shaka-player.compiled.js'];
+            playerEmbedder.libRootUrls.strobe = 'player_embedder/strobe-media';
+
+            function buildStreamUrl($el){
+                var wowzaHost = '//media.firstmethodistmansfield.tv',
+                    appName = 'live',
+                    streamName = 'livestream';
+                if ($el.data('wowzaHost')){
+                    wowzaHost = $el.data('wowzaHost');
+                }
+                if ($el.data('appName')){
+                    appName = $el.data('appName');
+                }
+                if ($el.data('streamName')){
+                    streamName = $el.data('streamName');
+                }
+                var url = [
+                    wowzaHost, appName, '_definst_', 'ngrp:', streamName,
+                ];
+                return url.join('/');
+            }
+
+            var $container = $("#fmcm-player-container");
+
+            if ($container.length){
+                var streamUrl = buildStreamUrl($container),
+                    embedData = {'container':$container, 'streamSrc':streamUrl};
+                // embedData.size = [
+                //     $container.innerWidth(),
+                //     $container.innerHeight(),
+                // ];
+                playerEmbedder.doEmbed(embedData).done(function(){
+                    $container.data('data', data);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

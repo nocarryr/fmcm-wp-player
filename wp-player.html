@@ -11,7 +11,11 @@
     <!-- This div is what should be added in the page content area.
     The data attributes are used in the script with defaults so we can
     change the stream url when needed. -->
-    <div id="fmcm-player-container" data-wowza-host="https://media.firstmethodistmansfield.tv" data-app-name="live" data-stream-name="livestream"></div>
+    <div id="fmcm-player-container"
+         data-test-mode="true"
+         data-wowza-host="https://media.firstmethodistmansfield.tv"
+         data-app-name="live"
+         data-stream-name="livestream"></div>
     <!-- </NOTE> -->
 
 
@@ -31,6 +35,13 @@
             playerEmbedder.libRootUrls.strobe = 'player_embedder/strobe-media';
 
             function buildStreamUrl($el){
+                var testUrls = {
+                    'mpd_url':'https://dash.akamaized.net/dash264/TestCases/1c/qualcomm/2/MultiRate.mpd',
+                    'hls_url':'https://cf-sf-video.wmspanel.com/local/raw/BigBuckBunny_320x180.mp4/playlist.m3u8',
+                };
+                if ($el.data('testMode')){
+                    return testUrls;
+                }
                 var wowzaHost = '//media.firstmethodistmansfield.tv',
                     appName = 'live',
                     streamName = 'livestream';

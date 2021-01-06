@@ -55,10 +55,7 @@
                 if ($el.data('streamName')){
                     streamName = $el.data('streamName');
                 }
-                var url = [
-                    wowzaHost, appName, '_definst_', 'ngrp:', streamName,
-                ];
-                return url.join('/');
+                return wowzaHost + '/' + appName + '/_definst_/ngrp:' + streamName;
             }
 
             var $container = $("#fmcm-player-container");
